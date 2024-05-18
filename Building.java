@@ -6,9 +6,6 @@ public class Building {
     int floorNumber;
     public List<Elevator> elevators;
 
-    public Building() {
-        this.elevators = new ArrayList<Elevator>();
-    }
     public  Building(int floorNumber, ArrayList<Elevator> elevators){
         this.floorNumber = floorNumber;
         this.elevators = elevators;
