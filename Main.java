@@ -11,8 +11,7 @@ public class Main {
         Building building = new Building(floorCount, new ArrayList<>());
         building.elevators.add(elevator1);
         building.elevators.add(elevator2);
-
-        for (int i = 0; i < random.nextInt(3, 13); i++) { // выбирается случайное количество пассажиров (от 3 до 12 вкл.)
+        for (int i = 0; i < random.nextInt(10, 40); i++) { // выбирается случайное количество пассажиров (от 10 до 39 вкл.)
             int w = random.nextInt(30, 121); // выбирается рандомный вес, пока что он ни на что не влияет
             int from = random.nextInt(1, building.floorNumber + 1); // выбирается, с какого этажа едет человек
             int to = random.nextInt(1, building.floorNumber + 1); // выбирается, на какой этаж едет человек
@@ -37,12 +36,12 @@ public class Main {
 
             Thread thread1 = new Thread(() -> { // создаем первый поток
                 if (!building.elevators.getFirst().passengers.isEmpty()) { // проверка на непустоту
-                    System.out.print("first elevator: ");
+                    System.out.printf(Color.ANSI_GREEN + "first elevator: "+ Color.ANSI_RESET);
                     building.elevators.getFirst().moveElevator(); // просчитываем действие лифта
                     for (int i = 0; i < floorCount; i++) { // скромная визуализация в консоли
                         System.out.printf("floor%d#", floorCount - i);
                         if (floorCount - i == building.elevators.getFirst().currentFloor) {
-                            System.out.print(" 1");
+                            System.out.print(Color.ANSI_GREEN + " 1" + Color.ANSI_RESET);
                             switch (building.elevators.getFirst().direction) {
                                 case 1:
                                     System.out.print("↑");
@@ -54,7 +53,7 @@ public class Main {
                         }
 
                         if (floorCount - i == building.elevators.getLast().currentFloor) {
-                            System.out.print(" 2");
+                            System.out.print(Color.ANSI_CYAN + " 2" + Color.ANSI_RESET);
                             switch (building.elevators.getLast().direction) {
                                 case 1:
                                     System.out.print("↑");
@@ -73,12 +72,12 @@ public class Main {
 
             Thread thread2 = new Thread(() -> { // создаем второй поток, далее аналогично
                 if (!building.elevators.getLast().passengers.isEmpty()) {
-                    System.out.print("second elevator: ");
+                    System.out.printf(Color.ANSI_CYAN + "second elevator: " + Color.ANSI_RESET);
                     building.elevators.getLast().moveElevator();
                     for (int i = 0; i < floorCount; i++) {
                         System.out.printf("floor%d#", floorCount - i);
                         if (floorCount - i == building.elevators.getFirst().currentFloor) {
-                            System.out.print(" 1");
+                            System.out.print(Color.ANSI_GREEN + " 1" + Color.ANSI_RESET);
                             switch (building.elevators.getFirst().direction) {
                                 case 1:
                                     System.out.print("↑");
@@ -90,7 +89,7 @@ public class Main {
 
                         }
                         if (floorCount - i == building.elevators.getLast().currentFloor) {
-                            System.out.print(" 2");
+                            System.out.print(Color.ANSI_CYAN + " 2" + Color.ANSI_RESET);
                             switch (building.elevators.getLast().direction) {
                                 case 1:
                                     System.out.print("↑");
