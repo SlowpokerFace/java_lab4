@@ -49,16 +49,41 @@ public class Elevator {
             }
         }
         else{
-            if (this.currentFloor == this.passengers.peek().from_floor) {
-                this.currentFloor = this.passengers.peek().to_floor;
-                this.direction = 0;
-                System.out.printf("floor now is %d\n", this.currentFloor);
-                this.removePassenger(this.passengers.peek());
-            }
-            else{
-                this.currentFloor = this.passengers.peek().from_floor;
-                this.direction = 0;
-                System.out.printf("floor now is %d\n", this.currentFloor);
+
+            if (this.passengers.peek().entered == true){
+                if (this.currentFloor != this.passengers.peek().to_floor) {
+//                this.currentFloor = this.passengers.peek().to_floor;
+                    if (this.currentFloor < this.passengers.peek().to_floor){
+                        this.currentFloor++;
+                    }
+                    else if (this.currentFloor > this.passengers.peek().to_floor) {
+                        this.currentFloor--;
+                    }
+                    System.out.printf("floor now is %d\n", this.currentFloor);
+
+                }
+                else if (this.currentFloor == this.passengers.peek().to_floor){
+                    this.direction = 0;
+                    System.out.printf("floor now is %d\n", this.currentFloor);
+                    this.removePassenger(this.passengers.peek());
+                }
+            }else {
+                if (this.currentFloor != this.passengers.peek().from_floor) {
+
+                    if (this.currentFloor < this.passengers.peek().from_floor) {
+                        this.currentFloor++;
+                    } else if (this.currentFloor > this.passengers.peek().from_floor) {
+                        this.currentFloor--;
+                    }
+                    System.out.printf("floor now is %d\n", this.currentFloor);
+
+                } else if (this.currentFloor == this.passengers.peek().from_floor) {
+                    this.direction = 0;
+                    System.out.printf("floor now is %d\n", this.currentFloor);
+                    this.passengers.peek().entered = true;
+                }
+
+
             }
         }
     }

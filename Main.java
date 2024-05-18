@@ -16,8 +16,10 @@ public class Main {
             int w = random.nextInt(30, 121); // выбирается рандомный вес, пока что он ни на что не влияет
             int from = random.nextInt(1, building.floorNumber + 1); // выбирается, с какого этажа едет человек
             int to = random.nextInt(1, building.floorNumber + 1); // выбирается, на какой этаж едет человек
-            if (from != to) { // проверка, чтобы начальный и кончный этаж не совпадают
+            if (from != to && from != 1) { // проверка, чтобы начальный и кончный этаж не совпадают
                 waiters.add(new Resident(w, from, to));
+            } else if (from != to) {
+                waiters.add(new Resident(w, from, to, true));
             }
         }
 
@@ -60,7 +62,7 @@ public class Main {
                                 case -1:
                                     System.out.print("↓");
                                     break;
-                        }
+                            }
 
                         }
                         System.out.print("\n");
@@ -108,13 +110,13 @@ public class Main {
 
             thread1.start(); // запускаем первый поток
             try {
-                Thread.sleep(100); // так как потоки действительно работают параллельно,
-            } catch (InterruptedException e) { // добавляем ожидание на 100 мс, чтобы
+                Thread.sleep(10); // так как потоки действительно работают параллельно,
+            } catch (InterruptedException e) { // добавляем ожидание на 10 мс, чтобы
                 throw new RuntimeException(e); // вывод в консоль выглядел нормальным образом
             } // если убрать sleep, можно убедиться в параллельности потоков
             thread2.start(); // запускаем второй поток
             try {
-                Thread.sleep(100);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
